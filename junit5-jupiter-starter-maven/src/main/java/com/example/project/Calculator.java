@@ -16,4 +16,8 @@ public class Calculator {
 		return a + b;
 	}
 
+	public String returnString() {
+		return "Test";
+	}
+
 }

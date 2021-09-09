@@ -32,11 +32,18 @@ class CalculatorTests {
 			"1,    2,   3",
 			"49,  51, 100",
 			"1,  100, 101",
-			"1,		1, 	3"
+			"1,		1, 	2"
 	})
 	void add(int first, int second, int expectedResult) {
 		Calculator calculator = new Calculator();
 		assertEquals(expectedResult, calculator.add(first, second),
 				() -> first + " + " + second + " should equal " + expectedResult);
+	}
+
+	@Test
+	@DisplayName("1 + 1 = 2")
+	void returnsString() {
+		Calculator calculator = new Calculator();
+		assertEquals("Test", calculator.returnString(), "function should return String Test");
 	}
 }
