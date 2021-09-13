@@ -131,4 +131,69 @@ public class ListTest {
 		 // Oh, and A + B can be mixed together at will
 	}
 	
+	@Test
+	public void testMockIndependence() {
+		
+		 List mockOne = mock(List.class);
+		 List mockTwo = mock(List.class);
+		 List mockThree = mock(List.class);
+		
+		 //using mocks - only mockOne is interacted
+		 mockOne.add("one");
+
+		 //ordinary verification
+		 verify(mockOne).add("one");
+
+		 //verify that method was never called on a mock
+		 verify(mockOne, never()).add("two");
+
+		 //verify that other mocks were not interacted
+		 verifyZeroInteractions(mockTwo, mockThree);
+	}
+	
+//	@Test
+//	public void testConsecutiveCalls() {
+//		
+//		 Calculator mock = mock(Calculator.class);
+//	
+//		 when(mock.add(1,2)
+//		   .thenThrow(new RuntimeException())
+//		   .thenReturn(3);
+//
+//		 //First call: throws runtime exception:
+//		 mock.someMethod("some arg");
+//
+//		 //Second call: prints "foo"
+//		 System.out.println(mock.someMethod("some arg"));
+//
+//		 //Any consecutive call: prints "foo" as well (last stubbing wins).
+//		 System.out.println(mock.someMethod("some arg"));
+//	}
+	
+	@Test
+	public void testSpy() {
+		   List list = new LinkedList();
+		   List spy = spy(list);
+
+		   //optionally, you can stub out some methods:
+		   when(spy.size()).thenReturn(100);
+
+		   //using the spy calls *real* methods
+		   spy.add("one");
+		   spy.add("two");
+
+		   //prints "one" - the first element of a list
+		   System.out.println(spy.get(0));
+
+		   //size() method was stubbed - 100 is printed
+		   System.out.println(spy.size());
+
+		   //optionally, you can verify
+		   verify(spy).add("one");
+		   verify(spy).add("two");
+	}
+
+
+
+	
 }
