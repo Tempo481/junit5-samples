@@ -193,7 +193,4 @@ public class ListTest {
 		   verify(spy).add("two");
 	}
 
-
-
-	
 }
